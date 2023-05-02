@@ -1,5 +1,6 @@
 import { getRounds, hashSync } from 'bcryptjs'
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BeforeInsert, BeforeUpdate } from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm'
+import Schedules from './schedules.entity'
 
 @Entity('users')
 class Users {
@@ -36,6 +37,9 @@ class Users {
             this.password = hashSync(this.password, 10)
         }
     }
+
+    @OneToMany(() => Schedules, (schedules) => schedules.user)
+    realState: Schedules[] 
 }
 
 export {

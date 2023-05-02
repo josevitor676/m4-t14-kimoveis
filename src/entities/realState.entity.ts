@@ -1,6 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, ManyToOne, OneToMany} from 'typeorm'
 import Addresses from './addresses.entity'
 import Categories from './categories.entity'
+import Schedules from './schedules.entity'
 
 @Entity('real_state')
 class RealState {
@@ -29,6 +30,9 @@ class RealState {
 
     @ManyToOne(() => Categories, category => category.realState)
     category: Categories;
+
+    @OneToMany(() => Schedules, (schedules) => schedules.realState)
+    schedule: Schedules[] 
 }
 
 export default RealState

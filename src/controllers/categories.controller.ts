@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { ICreateCategories } from "../interfaces/categories.interfaces"
 import createCategoriesService from "../services/Categories/createCategories.service"
 import listCategoriesService from "../services/Categories/listCategories.service"
+import listCategoriesByRealStateService from "../services/Categories/listCategoriesByRealState.service"
 
 const createCategorieController = async (req:Request, res: Response): Promise<Response> => {
 
@@ -21,7 +22,11 @@ const listCategoriesController = async (req: Request, res: Response): Promise<Re
 
 const listCategoriesByRealStateController = async (req: Request, res: Response): Promise<Response> => {
 
-    return res.json()
+    const idCategory: number = parseInt(req.params.id)
+
+    const categoryByRealState = await listCategoriesByRealStateService(idCategory)
+
+    return res.json(categoryByRealState)
 }
 
 export {

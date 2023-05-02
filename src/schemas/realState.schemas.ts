@@ -38,10 +38,20 @@ const returnRealStateSchema = z.object({
     updatedAt: z.date()
 })
 
-//IRealState
+const returnAddress = addressSchema.extend({
+    id:z.number()
+})
+
+const returnMultipleRealState = returnRealStateSchema.extend({
+    value: z.string(),
+    address: returnAddress.nullish(),
+    category: returnCategoriesSchema.nullish(),
+
+}).array();
 
 export {
     createRealStateSchema,
     realStateSchema,
-    returnRealStateSchema
+    returnRealStateSchema,
+    returnMultipleRealState
 }
